@@ -1,7 +1,7 @@
 USE bank_staging;
 GO
 
-
+/*
 CREATE TABLE stg_account (
     account_id INT,
     district_id INT,
@@ -35,22 +35,22 @@ CREATE TABLE stg_disposition(
 GO
 
 CREATE TABLE stg_district (
-    district_id        INT,
-    district_name      VARCHAR(50),
-    region             VARCHAR(50),
-    population         INT,
-    num_munic_under499 INT,
-    num_munic_500_1999 INT,
+    district_id         INT,
+    district_name       VARCHAR(50),
+    region              VARCHAR(50),
+    population          INT,
+    num_munic_under499  INT,
+    num_munic_500_1999  INT,
     num_munic_2000_9999 INT,
     num_munic_over10000 INT,
-    num_cities         INT,
-    urban_ratio        DECIMAL(5,2),
-    avg_salary         INT,
-    unemploy_95    DECIMAL(5,2),
-    unemploy_96    DECIMAL(5,2),
-    num_entrep  INT,
-    num_crimes_95      INT,
-    num_crimes_96      INT
+    num_cities          INT,
+    urban_ratio         DECIMAL(5,2),
+    avg_salary          INT,
+    unemploy_95         VARCHAR(10),
+    unemploy_96         VARCHAR(10),
+    num_entrep          INT,
+    num_crimes_95       INT,
+    num_crimes_96       INT
 );
 GO
 
@@ -88,6 +88,7 @@ CREATE TABLE stg_transaction (
     account_to  VARCHAR(20)
 );
 GO
+*/
 
 /*
 SELECT TABLE_NAME 
@@ -95,3 +96,28 @@ FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_TYPE = 'BASE TABLE'
 ORDER BY TABLE_NAME;
 */
+
+
+
+DROP TABLE stg_district;
+GO
+
+CREATE TABLE stg_district (
+    district_id         INT,
+    district_name       VARCHAR(50),
+    region              VARCHAR(50),
+    population          INT,
+    num_munic_under499  INT,
+    num_munic_500_1999  INT,
+    num_munic_2000_9999 INT,
+    num_munic_over10000 INT,
+    num_cities          INT,
+    urban_ratio         DECIMAL(5,2),
+    avg_salary          INT,
+    unemploy_95         VARCHAR(10),
+    unemploy_96         VARCHAR(10),
+    num_entrep          INT,
+    num_crimes_95       VARCHAR(10),
+    num_crimes_96       VARCHAR(10)
+);
+GO
