@@ -238,7 +238,7 @@ Run SQL scripts in order: `01` → `02` → `03` → `04` → `05` → `06`
 - [x] Data quality checks — 7 checks, all passing
 - [x] Star schema — curated layer, 7 tables
 - [x] ETL scripts — staging to curated, all transformations applied
-- [ ] Incremental load — watermark pattern on trans_date
+- [x] Incremental load — watermark pattern on trans_date
 - [ ] Power BI — semantic model + 3 dashboards
 - [ ] RLS — by district
 - [ ] Incremental refresh — RangeStart/RangeEnd on FACT_TRANSACTIONS
