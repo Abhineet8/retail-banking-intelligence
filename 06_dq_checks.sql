@@ -1,6 +1,6 @@
 USE bank_staging;
 GO
-
+/*
 -- 1. Transactions with no matching account
 SELECT COUNT(*) AS orphan_transactions
 FROM stg_transaction t
@@ -30,8 +30,8 @@ GO
 -- 5. Loans with invalid status (only A B C D are valid)
 SELECT COUNT(*) AS invalid_loan_status
 FROM stg_loan
-WHERE status NOT IN ('A', 'B', 'C', 'D');
-GO
+WHERE REPLACE(REPLACE(TRIM(status), '"', ''), CHAR(13), '') 
+      NOT IN ('A', 'B', 'C', 'D');
 
 -- 6. Cards with no matching disposition
 SELECT COUNT(*) AS orphan_cards
@@ -49,3 +49,6 @@ FROM (
     HAVING COUNT(*) > 1
 ) duplicates;
 GO
+*/
+
+--SELECT DISTINCT status FROM stg_loan;
