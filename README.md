@@ -236,8 +236,8 @@ Run SQL scripts in order: `01` → `02` → `03` → `04` → `05` → `06`
 - [x] Translation layer — Czech codes decoded to English
 - [x] ETL run log — all loads documented
 - [x] Data quality checks — 7 checks, all passing
-- [ ] Star schema — curated layer
-- [ ] ETL scripts — staging to curated
+- [x] Star schema — curated layer, 7 tables
+- [x] ETL scripts — staging to curated, all transformations applied
 - [ ] Incremental load — watermark pattern on trans_date
 - [ ] Power BI — semantic model + 3 dashboards
 - [ ] RLS — by district
