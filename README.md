@@ -74,17 +74,17 @@ Raw .asc files (8 tables)
         ▼
 ┌─────────────────────┐
 │   Power BI          │  Semantic model connected to bank_curated.
-│   Desktop           │  DAX measure library. Incremental refresh.
-│                     │  RLS by district.
+│   Desktop           │  DAX measure library. 16 measures across 3 fact tables.
+│                     │  RLS by district. Incremental refresh on FACT_TRANSACTIONS.
 └─────────────────────┘
         │
         ▼
 ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
 │  Transaction │  │    Loan      │  │    Card      │
 │  Monitoring  │  │  Portfolio   │  │  Analytics   │
-│  Dashboard   │  │  Dashboard   │  │  + Cross-sell│
+│  Dashboard ✅│  │  Dashboard   │  │  + Cross-sell│
 └──────────────┘  └──────────────┘  └──────────────┘
-        
+
 ┌─────────────────────────────────────────┐
 │   Power Platform — Loan Exception Workflow
 │   Dataverse → Canvas App → Power Automate
@@ -101,7 +101,7 @@ Raw .asc files (8 tables)
                     DIM_DATE
                        │
 DIM_DISTRICT ──── FACT_TRANSACTIONS ──── DIM_ACCOUNT ──── DIM_CLIENT
-                       
+
 DIM_DISTRICT ──── FACT_LOANS ──── DIM_ACCOUNT ──── DIM_CLIENT
 
                   FACT_CARDS ──── DIM_ACCOUNT ──── DIM_CLIENT
@@ -116,19 +116,19 @@ DIM_DISTRICT ──── FACT_LOANS ──── DIM_ACCOUNT ──── DIM_C
 
 ## Dashboards
 
-### 1 — Transaction Monitoring
-- Daily and monthly transaction volumes and average balances
-- Card (CCW) vs cash withdrawal vs credit breakdown
-- District-level transaction volumes overlaid with average salary data
-- Running balance anomaly detection — accounts flagged where balance goes negative
+### 1 — Transaction Monitoring ✅
+- Monthly transaction volumes and average balances
+- Card vs cash withdrawal vs credit breakdown by operation type
+- District-level transaction volumes — top 10 by total volume
+- Running balance anomaly table — accounts flagged where balance goes negative
 
-### 2 — Loan Portfolio Risk
+### 2 — Loan Portfolio Risk *(in progress)*
 - Loan status breakdown: A (good/finished) · B (good/running) · C (bad/running) · D (bad/finished)
 - Bad loan rate % by district correlated with unemployment rate
 - Outstanding balance vs repayment progress by duration bucket (12/24/36/48/60 months)
 - Client risk segmentation by age group and district economic indicators
 
-### 3 — Card Analytics + Cross-sell
+### 3 — Card Analytics + Cross-sell *(coming)*
 - Card issuance trend by type (classic / gold / junior)
 - Card vs non-card transaction pattern analysis per account segment
 - Cross-sell signal: accounts with 12+ months clean history and no card issued
@@ -166,14 +166,13 @@ retail-banking-intelligence/
 │   ├── 04_etl_log.sql                # ETL run log table + initial entries
 │   ├── 05_translation_layer.sql      # Czech → English lookup tables
 │   ├── 06_dq_checks.sql              # 7 data quality checks
-│   ├── 07_curated_schema.sql         # Star schema DDL (coming)
-│   ├── 08_etl_curated.sql            # Staging → curated ETL (coming)
-│   └── 09_incremental_load.sql       # Watermark + incremental logic (coming)
+│   ├── 07_curated_schema.sql         # Star schema DDL
+│   ├── 08_etl_curated.sql            # Staging → curated ETL
+│   └── 09_incremental_load.sql       # Watermark + incremental load pattern
 │
-├── powerbi/                          # Power BI project files (coming)
-│   ├── retail_banking.pbip
+├── powerbi/
 │   └── release/
-│       └── retail_banking.pbix
+│       └── retail_banking.pbix       # Power BI — Dashboard 1 complete
 │
 ├── security/
 │   └── rls.md                        # RLS design + limitations (coming)
@@ -223,9 +222,7 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YourPassword!" \
 docker start sqlserver
 ```
 
-Connect VS Code to `localhost` with username `sa`.
-
-Run SQL scripts in order: `01` → `02` → `03` → `04` → `05` → `06`
+Connect VS Code to `127.0.0.1,1433` with username `sa`. Run SQL scripts in order: `01` → `02` → `03` → `04` → `05` → `06` → `07` → `08` → `09`
 
 ---
 
@@ -239,7 +236,10 @@ Run SQL scripts in order: `01` → `02` → `03` → `04` → `05` → `06`
 - [x] Star schema — curated layer, 7 tables
 - [x] ETL scripts — staging to curated, all transformations applied
 - [x] Incremental load — watermark pattern on trans_date
-- [ ] Power BI — semantic model + 3 dashboards
+- [x] Power BI semantic model — 7 tables, 8 relationships, 16 DAX measures
+- [x] Dashboard 1 — Transaction Monitoring
+- [ ] Dashboard 2 — Loan Portfolio Risk
+- [ ] Dashboard 3 — Card Analytics + Cross-sell
 - [ ] RLS — by district
 - [ ] Incremental refresh — RangeStart/RangeEnd on FACT_TRANSACTIONS
 - [ ] Power Platform — loan exception workflow
@@ -247,3 +247,9 @@ Run SQL scripts in order: `01` → `02` → `03` → `04` → `05` → `06`
 - [ ] Portfolio — demo video + case study finalised
 
 ---
+
+## Author
+
+**Abhineet Vyas** — Power Platform Engineer & BI Developer  
+Dublin, Ireland  
+[LinkedIn](https://www.linkedin.com/in/abhineet-vyas-246997173) · [GitHub](https://github.com/Abhineet8)
