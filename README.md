@@ -175,7 +175,7 @@ retail-banking-intelligence/
 │       └── retail_banking.pbix       # Power BI — all 3 dashboards complete
 │
 ├── security/
-│   └── rls.md                        # RLS design + limitations (coming)
+│   └── rls.md                        # RLS design + limitations
 │
 ├── powerplatform/                    # Power Platform components (coming)
 │   ├── solution_exports/
@@ -240,7 +240,7 @@ Connect VS Code to `127.0.0.1,1433` with username `sa`. Run SQL scripts in order
 - [x] Dashboard 1 — Transaction Monitoring
 - [x] Dashboard 2 — Loan Portfolio Risk
 - [x] Dashboard 3 — Card Analytics + Cross-sell
-- [ ] RLS — by district
+- [x] RLS — by district
 - [ ] Incremental refresh — RangeStart/RangeEnd on FACT_TRANSACTIONS
 - [ ] Power Platform — loan exception workflow
 - [ ] ALM — solution packaging + Solution Checker
