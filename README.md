@@ -82,7 +82,7 @@ Raw .asc files (8 tables)
 ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
 │  Transaction │  │    Loan      │  │    Card      │
 │  Monitoring  │  │  Portfolio   │  │  Analytics   │
-│  Dashboard ✅│  │  Dashboard   │  │  + Cross-sell│
+│  Dashboard ✅│  │  Risk      ✅│  │  + Cross-sell│
 └──────────────┘  └──────────────┘  └──────────────┘
 
 ┌─────────────────────────────────────────┐
@@ -122,13 +122,13 @@ DIM_DISTRICT ──── FACT_LOANS ──── DIM_ACCOUNT ──── DIM_C
 - District-level transaction volumes — top 10 by total volume
 - Running balance anomaly table — accounts flagged where balance goes negative
 
-### 2 — Loan Portfolio Risk *(in progress)*
+### 2 — Loan Portfolio Risk ✅
 - Loan status breakdown: A (good/finished) · B (good/running) · C (bad/running) · D (bad/finished)
-- Bad loan rate % by district correlated with unemployment rate
-- Outstanding balance vs repayment progress by duration bucket (12/24/36/48/60 months)
-- Client risk segmentation by age group and district economic indicators
+- Bad loan rate % by district correlated with unemployment rate — scatter chart with risk category colour coding
+- Bad loans by duration bucket (12/24/36/48/60 months) — longer duration loans have higher default rates
+- Top 5 highest risk districts table with conditional formatting
 
-### 3 — Card Analytics + Cross-sell *(coming)*
+### 3 — Card Analytics + Cross-sell *(in progress)*
 - Card issuance trend by type (classic / gold / junior)
 - Card vs non-card transaction pattern analysis per account segment
 - Cross-sell signal: accounts with 12+ months clean history and no card issued
@@ -172,7 +172,7 @@ retail-banking-intelligence/
 │
 ├── powerbi/
 │   └── release/
-│       └── retail_banking.pbix       # Power BI — Dashboard 1 complete
+│       └── retail_banking.pbix       # Power BI — Dashboards 1 & 2 complete
 │
 ├── security/
 │   └── rls.md                        # RLS design + limitations (coming)
@@ -234,11 +234,11 @@ Connect VS Code to `127.0.0.1,1433` with username `sa`. Run SQL scripts in order
 - [x] ETL run log — all loads documented
 - [x] Data quality checks — 7 checks, all passing
 - [x] Star schema — curated layer, 7 tables
-- [x] ETL scripts — staging to curated, all transformations applied
+- [x] ETT scripts — staging to curated, all transformations applied
 - [x] Incremental load — watermark pattern on trans_date
 - [x] Power BI semantic model — 7 tables, 8 relationships, 16 DAX measures
 - [x] Dashboard 1 — Transaction Monitoring
-- [ ] Dashboard 2 — Loan Portfolio Risk
+- [x] Dashboard 2 — Loan Portfolio Risk
 - [ ] Dashboard 3 — Card Analytics + Cross-sell
 - [ ] RLS — by district
 - [ ] Incremental refresh — RangeStart/RangeEnd on FACT_TRANSACTIONS
