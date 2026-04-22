@@ -241,7 +241,7 @@ Connect VS Code to `127.0.0.1,1433` with username `sa`. Run SQL scripts in order
 - [x] Dashboard 2 — Loan Portfolio Risk
 - [x] Dashboard 3 — Card Analytics + Cross-sell
 - [x] RLS — by district
-- [ ] Incremental refresh — RangeStart/RangeEnd on FACT_TRANSACTIONS
+- [x] Incremental refresh — RangeStart/RangeEnd on FACT_TRANSACTIONS
 - [ ] Power Platform — loan exception workflow
 - [ ] ALM — solution packaging + Solution Checker
 - [ ] Portfolio — demo video + case study finalised
